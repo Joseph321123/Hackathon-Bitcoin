@@ -1,0 +1,106 @@
+.scam-game {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.scam-game__progress {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.scam-game__card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.scam-game__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+  color: var(--text-heading);
+}
+
+.scam-game__desc {
+  margin: 0 0 1.25rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.scam-game__buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.scam-game__btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.scam-game__btn:hover {
+  transform: translateY(-2px);
+}
+
+.scam-game__btn--safe {
+  background: var(--success-bg);
+  color: var(--success);
+  border-color: var(--success);
+}
+
+.scam-game__btn--scam {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+[data-theme="dark"] .scam-game__btn--scam {
+  background: rgba(185, 28, 28, 0.2);
+}
+
+.scam-game__feedback {
+  padding-top: 0.5rem;
+}
+
+.scam-game__result {
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.scam-game__result--ok {
+  color: var(--success);
+}
+
+.scam-game__result--fail {
+  color: #b91c1c;
+}
+
+.scam-game__explanation {
+  margin: 0 0 1rem;
+  padding: 0.75rem;
+  background: var(--bg-muted);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  color: var(--text-body);
+}
+
+.scam-game__final {
+  text-align: center;
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.scam-game__final p {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}

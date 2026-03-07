@@ -1,0 +1,96 @@
+/* Calculadora: herramienta clara y usable */
+.calculator {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.calculator__title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.calculator__hint {
+  margin: 0 0 var(--space-4);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.calculator__tabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.calculator__tab {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-body);
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.calculator__tab:hover {
+  background: var(--bg-muted);
+  border-color: var(--border-strong);
+}
+
+.calculator__tab--active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.calculator__form label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--text-heading);
+}
+
+.calculator__input {
+  width: 100%;
+  max-width: 280px;
+  padding: var(--space-3) var(--space-4);
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text-body);
+  margin-bottom: var(--space-3);
+  font-family: var(--font-body);
+}
+
+.calculator__input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+
+.calculator__result {
+  margin: 0 0 var(--space-2);
+  font-size: 1.0625rem;
+  color: var(--text-body);
+}
+
+.calculator__result strong {
+  color: var(--primary);
+  font-family: var(--font-heading);
+}
+
+.calculator__rate {
+  margin: var(--space-4) 0 0;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}

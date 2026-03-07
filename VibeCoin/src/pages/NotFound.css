@@ -1,0 +1,19 @@
+.not-found {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.not-found h1 {
+  font-size: 4rem;
+  margin: 0 0 0.5rem;
+  color: var(--primary);
+}
+
+.not-found p {
+  margin: 0 0 1.5rem;
+  color: var(--text-muted);
+}
+
+.not-found .btn {
+  display: inline-block;
+}

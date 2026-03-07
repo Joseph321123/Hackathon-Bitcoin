@@ -1,0 +1,17 @@
+.error-boundary {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.error-boundary h2 {
+  margin: 0 0 0.5rem;
+  color: var(--text-heading);
+}
+
+.error-boundary p {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+}

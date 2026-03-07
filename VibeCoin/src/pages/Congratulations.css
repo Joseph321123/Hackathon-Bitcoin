@@ -1,0 +1,54 @@
+.congratulations {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.congratulations--locked {
+  padding: var(--space-6) var(--space-4);
+}
+
+.congratulations__progress {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.congratulations__confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, var(--primary-bg) 0%, transparent 50%);
+  opacity: 0.5;
+}
+
+.congratulations__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin: 0 0 var(--space-2);
+  color: var(--primary);
+}
+
+.congratulations__subtitle {
+  font-size: 1.125rem;
+  color: var(--text-body);
+  margin: 0 0 var(--space-5);
+}
+
+.congratulations__badge {
+  font-size: 4rem;
+  margin: 0 0 var(--space-5);
+  opacity: 0.9;
+}
+
+.congratulations__text {
+  color: var(--text-body);
+  line-height: 1.65;
+  margin: 0 0 var(--space-6);
+}
+
+.congratulations__btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}

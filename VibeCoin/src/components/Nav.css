@@ -1,0 +1,92 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.nav__brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--text-heading);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav__brand:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.nav__brand:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+.nav__logo {
+  font-size: 1.375rem;
+  color: var(--primary);
+}
+
+.nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  flex: 1;
+  justify-content: center;
+}
+
+.nav__link {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav__link:hover {
+  background: var(--bg-muted);
+  color: var(--text-heading);
+  text-decoration: none;
+}
+
+.nav__link--active {
+  background: var(--primary);
+  color: #fff;
+}
+
+.nav__link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.nav__theme {
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  font-size: 1.125rem;
+  line-height: 1;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.nav__theme:hover {
+  background: var(--border);
+}
+
+.nav__theme:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

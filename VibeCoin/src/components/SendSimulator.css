@@ -1,0 +1,77 @@
+.send-simulator {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.send-simulator__steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.send-simulator__step--active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.send-simulator__content {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.send-simulator__form label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+  color: var(--text-heading);
+}
+
+.send-simulator__input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text-body);
+  margin-bottom: 1rem;
+}
+
+.send-simulator__hint,
+.send-simulator__warn {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.send-simulator__warn {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-muted);
+  border-radius: var(--radius);
+}
+
+.send-simulator__review p {
+  margin: 0 0 0.5rem;
+}
+
+.send-simulator__done {
+  text-align: center;
+}
+
+.send-simulator__done-icon {
+  font-size: 3rem;
+  margin: 0 0 0.5rem;
+}
+
+.send-simulator__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
