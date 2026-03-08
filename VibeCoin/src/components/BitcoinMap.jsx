@@ -60,6 +60,9 @@ export function BitcoinMap({ onVisit }) {
 
       <section className="bitcoin-map__section" aria-labelledby="map-title">
         <h2 id="map-title" className="bitcoin-map__section-title">Mapa de lugares por ubicación</h2>
+        <p className="bitcoin-map__map-hint">
+          En el mapa aparecen las marcas famosas (Tesla, Microsoft, Starbucks, Bitso, etc.) y más puntos. Haz clic en cualquier marcador para ver <strong>Acepta Bitcoin</strong>.
+        </p>
         {loading ? (
           <p className="bitcoin-map__loading">Cargando ubicaciones…</p>
         ) : (
@@ -86,7 +89,12 @@ export function BitcoinMap({ onVisit }) {
               </button>
             ) : (
               <Suspense fallback={<p className="bitcoin-map__loading">Cargando mapa…</p>}>
-                <MapLeaflet locations={locations} defaultCenter={[19.4326, -99.1332]} defaultZoom={5} />
+                <MapLeaflet
+                  locations={locations}
+                  famousPlaces={famousPlaces}
+                  defaultCenter={[19.4326, -99.1332]}
+                  defaultZoom={4}
+                />
               </Suspense>
             )}
           </>

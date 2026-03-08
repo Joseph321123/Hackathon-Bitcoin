@@ -1,6 +1,6 @@
 /**
- * Marcas y establecimientos famosos que aceptan Bitcoin como método de pago
- * (directamente o mediante BitPay, Strike, etc.)
+ * Marcas y establecimientos famosos que aceptan Bitcoin como método de pago.
+ * Incluyen coordenadas (lat, lon) para mostrarlos en el mapa (HQ o ubicación representativa).
  */
 
 export const famousPlaces = [
@@ -11,6 +11,8 @@ export const famousPlaces = [
     description: 'Aceptó Bitcoin para vehículos en 2021 (por regiones). Pagos en BTC a través de su plataforma.',
     region: 'Global (según región)',
     link: 'https://www.tesla.com',
+    lat: 30.2672,
+    lon: -97.7431,
   },
   {
     id: 'microsoft',
@@ -19,6 +21,8 @@ export const famousPlaces = [
     description: 'Acepta Bitcoin desde 2014. Recargas de cuenta Microsoft, Xbox, Windows Store y Office 365 vía BitPay.',
     region: 'Global',
     link: 'https://www.microsoft.com',
+    lat: 47.674,
+    lon: -122.1215,
   },
   {
     id: 'starbucks',
@@ -27,6 +31,8 @@ export const famousPlaces = [
     description: 'Pago con Bitcoin mediante apps como Bakkt o Strike en tiendas participantes.',
     region: 'Estados Unidos y otros',
     link: 'https://www.starbucks.com',
+    lat: 47.5809,
+    lon: -122.316,
   },
   {
     id: 'att',
@@ -35,6 +41,8 @@ export const famousPlaces = [
     description: 'Primera operadora grande en EE. UU. en aceptar Bitcoin (BitPay) para facturas.',
     region: 'Estados Unidos',
     link: 'https://www.att.com',
+    lat: 32.7767,
+    lon: -96.797,
   },
   {
     id: 'paypal',
@@ -43,6 +51,8 @@ export const famousPlaces = [
     description: 'Permite comprar, vender y mantener Bitcoin. Checkout con cripto en comercios que lo habiliten.',
     region: 'Varios países',
     link: 'https://www.paypal.com',
+    lat: 37.3382,
+    lon: -121.8863,
   },
   {
     id: 'newegg',
@@ -51,6 +61,8 @@ export const famousPlaces = [
     description: 'Tienda de tecnología que acepta Bitcoin y otras criptomonedas en su checkout.',
     region: 'Estados Unidos, Canadá',
     link: 'https://www.newegg.com',
+    lat: 33.7701,
+    lon: -118.1937,
   },
   {
     id: 'overstock',
@@ -59,6 +71,8 @@ export const famousPlaces = [
     description: 'Una de las primeras grandes tiendas en aceptar Bitcoin para muebles y hogar.',
     region: 'Estados Unidos',
     link: 'https://www.overstock.com',
+    lat: 40.7608,
+    lon: -111.891,
   },
   {
     id: 'amc',
@@ -67,6 +81,8 @@ export const famousPlaces = [
     description: 'Cadenas de cines que aceptan Bitcoin y otras cripto para entradas y snacks.',
     region: 'Estados Unidos',
     link: 'https://www.amctheatres.com',
+    lat: 40.7128,
+    lon: -74.006,
   },
   {
     id: 'namecheap',
@@ -75,6 +91,8 @@ export const famousPlaces = [
     description: 'Registro de dominios y servicios web con pago en Bitcoin.',
     region: 'Global',
     link: 'https://www.namecheap.com',
+    lat: 51.5074,
+    lon: -0.1278,
   },
   {
     id: 'bitso',
@@ -83,5 +101,7 @@ export const famousPlaces = [
     description: 'Exchange regulado en México. Permite comprar Bitcoin con MXN (SPEI, tarjeta) y usarlo o enviarlo.',
     region: 'México, Latinoamérica',
     link: 'https://bitso.com',
+    lat: 19.4326,
+    lon: -99.1332,
   },
 ];

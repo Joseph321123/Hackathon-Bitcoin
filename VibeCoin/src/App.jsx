@@ -11,6 +11,11 @@ import { Send } from './pages/Send';
 import { Quiz } from './pages/Quiz';
 import { NotFound } from './pages/NotFound';
 import { Congratulations } from './pages/Congratulations';
+import { Principiantes } from './pages/Principiantes';
+import { Avanzado } from './pages/Avanzado';
+import { Recursos } from './pages/Recursos';
+import { Noticias } from './pages/Noticias';
+import { BitcoinGames } from './pages/BitcoinGames';
 import './App.css';
 
 const MapPage = lazy(() => import('./pages/Map.jsx').then((m) => ({ default: m.Map })));
@@ -34,6 +39,11 @@ export default function App() {
     <Router basename={basename}>
       <Routes>
         <Route path="/" element={<Layout {...layoutProps}><Home /></Layout>} />
+        <Route path="/principiantes" element={<Layout {...layoutProps}><Principiantes /></Layout>} />
+        <Route path="/noticias" element={<Layout {...layoutProps}><Noticias /></Layout>} />
+        <Route path="/avanzado" element={<Layout {...layoutProps}><Avanzado /></Layout>} />
+        <Route path="/juegos-btc" element={<Layout {...layoutProps}><BitcoinGames /></Layout>} />
+        <Route path="/recursos" element={<Layout {...layoutProps}><Recursos /></Layout>} />
         <Route path="/learn" element={<Layout {...layoutProps}><Learn /></Layout>} />
         <Route path="/comprar" element={<Layout {...layoutProps}><Buy /></Layout>} />
         <Route path="/wallet-game" element={<Layout {...layoutProps}><WalletGame /></Layout>} />

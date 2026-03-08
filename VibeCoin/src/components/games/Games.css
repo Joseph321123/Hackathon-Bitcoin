@@ -1,0 +1,316 @@
+/* ===== Bitcoin Strategy Games — tema tipo dashboard ===== */
+.games__box {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.games__box--dark {
+  background: #0f172a;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+.games__header {
+  padding: var(--space-4);
+  border-bottom: 1px solid #334155;
+}
+
+.games__title {
+  margin: 0 0 var(--space-1);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.games__subtitle {
+  margin: 0 0 var(--space-2);
+  font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.games__checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.games__checkbox input {
+  accent-color: var(--primary);
+}
+
+.games__loading {
+  padding: var(--space-8);
+  text-align: center;
+  color: #94a3b8;
+}
+
+.games__chart-wrap {
+  padding: var(--space-2);
+  min-height: 280px;
+}
+
+.games__portfolio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: #1e293b;
+  border-top: 1px solid #334155;
+}
+
+.games__stat {
+  text-align: center;
+}
+
+.games__stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.games__stat-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.games__stat--total .games__stat-value {
+  color: var(--primary);
+}
+
+.games__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+  padding: var(--space-4);
+  border-top: 1px solid #334155;
+}
+
+.games__btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.games__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.games__btn:hover:not(:disabled) {
+  transform: scale(1.02);
+}
+
+.games__btn--buy {
+  background: #22c55e;
+  color: #fff;
+}
+
+.games__btn--sell {
+  background: #ef4444;
+  color: #fff;
+}
+
+.games__btn--hold {
+  background: #64748b;
+  color: #fff;
+}
+
+.games__btn--primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.games__result {
+  padding: var(--space-4);
+  border-top: 1px solid #334155;
+  text-align: center;
+}
+
+.games__result h4 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.125rem;
+  color: #f8fafc;
+}
+
+.games__result p {
+  margin: 0 0 var(--space-2);
+  font-size: 0.9375rem;
+  color: #cbd5e1;
+}
+
+.games__result--win {
+  color: #22c55e !important;
+  font-weight: 600;
+}
+
+.games__result--lose {
+  color: #ef4444 !important;
+  font-weight: 600;
+}
+
+.games__result--perfect {
+  color: var(--primary) !important;
+  font-weight: 700;
+  font-size: 1.125rem !important;
+}
+
+.games__best {
+  margin-bottom: var(--space-3) !important;
+  font-size: 0.8125rem !important;
+  color: #94a3b8 !important;
+}
+
+.games__result .games__btn {
+  margin-top: var(--space-2);
+}
+
+/* Guess the price */
+.games__guess-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid #334155;
+}
+
+.games__guess-label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.games__guess-input {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid #475569;
+  border-radius: var(--radius);
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 1rem;
+  min-width: 140px;
+}
+
+.games__guess-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Page: tabs and share */
+.games-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-4) var(--space-8);
+}
+
+.games-page__header {
+  text-align: center;
+  padding: var(--space-6) 0;
+}
+
+.games-page__title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.games-page__tagline {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-body);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.games-page__tabs {
+  display: flex;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.games-page__tab {
+  padding: var(--space-2) var(--space-4);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.games-page__tab:hover {
+  color: var(--text-heading);
+}
+
+.games-page__tab--active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.games-page__share {
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  background: var(--bg-muted);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.games-page__share-title {
+  margin: 0 0 var(--space-2);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.games-page__share-card {
+  padding: var(--space-4);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-3);
+  font-size: 0.9375rem;
+  color: var(--text-body);
+}
+
+.games-page__share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.games-page__share-btn {
+  padding: var(--space-2) var(--space-4);
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.games-page__share-btn:hover {
+  background: var(--primary-hover);
+}

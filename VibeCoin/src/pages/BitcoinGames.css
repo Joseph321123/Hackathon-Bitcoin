@@ -1,0 +1,10 @@
+/* Página Bitcoin Games reutiliza .section-page y .games-* de Games.css */
+.games-page__content {
+  margin-bottom: var(--space-4);
+}
+
+.games-page__share-desc {
+  margin: 0 0 var(--space-2);
+  font-size: 0.9375rem;
+  color: var(--text-body);
+}

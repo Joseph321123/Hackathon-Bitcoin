@@ -12,10 +12,10 @@ if (typeof L !== 'undefined' && L.Icon?.Default?.prototype?._getIconUrl) {
 }
 
 /**
- * Mapa Leaflet creado con la API imperativa para evitar
- * "Map container is already initialized" (react-leaflet + Strict Mode).
+ * Mapa Leaflet: muestra ubicaciones normales + marcas famosas (Tesla, Microsoft, etc.).
+ * Al hacer clic en cualquier marcador se muestra "Acepta Bitcoin".
  */
-export function MapLeaflet({ locations, defaultCenter = [19.4326, -99.1332], defaultZoom = 5 }) {
+export function MapLeaflet({ locations = [], famousPlaces = [], defaultCenter = [19.4326, -99.1332], defaultZoom = 5 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
 
@@ -33,15 +33,32 @@ export function MapLeaflet({ locations, defaultCenter = [19.4326, -99.1332], def
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
 
-    const list = Array.isArray(locations) ? locations : [];
-    const markers = list.map((loc) => {
-      const marker = L.marker([loc.lat, loc.lon]).addTo(map);
-      marker.bindPopup(`<strong>${escapeHtml(loc.name || 'Negocio Bitcoin')}</strong><br/>Acepta Bitcoin`);
-      return marker;
+    const markers = [];
+
+    // Marcas famosas (Tesla, Microsoft, Bitso, etc.)
+    const famous = Array.isArray(famousPlaces) ? famousPlaces.filter((p) => p.lat != null && p.lon != null) : [];
+    famous.forEach((place) => {
+      const marker = L.marker([place.lat, place.lon]).addTo(map);
+      const category = place.category ? ` — ${escapeHtml(place.category)}` : '';
+      marker.bindPopup(
+        `<strong>${escapeHtml(place.name || '')}</strong>${category}<br/><span class="popup-accepts">✓ Acepta Bitcoin</span>`
+      );
+      markers.push(marker);
     });
 
-    if (list.length > 0) {
-      map.setView([list[0].lat, list[0].lon], 5);
+    // Ubicaciones de la API / fallback
+    const list = Array.isArray(locations) ? locations : [];
+    list.forEach((loc) => {
+      const marker = L.marker([loc.lat, loc.lon]).addTo(map);
+      marker.bindPopup(
+        `<strong>${escapeHtml(loc.name || 'Negocio Bitcoin')}</strong><br/><span class="popup-accepts">✓ Acepta Bitcoin</span>`
+      );
+      markers.push(marker);
+    });
+
+    const total = famous.length + list.length;
+    if (total > 0) {
+      map.setView(defaultCenter, defaultZoom);
     }
 
     mapRef.current = map;
@@ -51,7 +68,7 @@ export function MapLeaflet({ locations, defaultCenter = [19.4326, -99.1332], def
       map.remove();
       mapRef.current = null;
     };
-  }, [locations?.length]);
+  }, [locations?.length, famousPlaces?.length, defaultCenter, defaultZoom]);
 
   return (
     <div className="bitcoin-map__container">

@@ -32,6 +32,16 @@ export function Home() {
         )}
       </section>
 
+      <nav className="home__sections" aria-label="Secciones del sitio">
+        <p className="home__sections-label">Explorar por sección:</p>
+        <ul className="home__sections-list">
+          <li><Link to="/principiantes" className="home__sections-link">Principiantes</Link></li>
+          <li><Link to="/noticias" className="home__sections-link">Noticias</Link></li>
+          <li><Link to="/avanzado" className="home__sections-link">Avanzado</Link></li>
+          <li><Link to="/recursos" className="home__sections-link">Recursos</Link></li>
+        </ul>
+      </nav>
+
       <div className="home__guide" role="region" aria-label="Guía rápida">
         <p className="home__guide-title">¿Primera vez? Sigue estos 3 pasos:</p>
         <ol className="home__guide-steps">

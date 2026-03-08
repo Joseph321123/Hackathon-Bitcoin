@@ -3,14 +3,10 @@ import './Nav.css';
 
 const links = [
   { to: '/', label: 'Inicio' },
-  { to: '/learn', label: 'Aprende' },
-  { to: '/comprar', label: 'Comprar' },
-  { to: '/wallet-game', label: 'Wallet' },
-  { to: '/scam', label: 'Estafas' },
-  { to: '/enviar', label: 'Enviar' },
-  { to: '/quiz', label: 'Quiz' },
-  { to: '/mapa', label: 'Mapa' },
-  { to: '/felicitaciones', label: 'Master' },
+  { to: '/principiantes', label: 'Principiantes' },
+  { to: '/noticias', label: 'Noticias' },
+  { to: '/avanzado', label: 'Avanzado' },
+  { to: '/recursos', label: 'Recursos' },
 ];
 
 export function Nav({ darkMode, onToggleDark }) {
