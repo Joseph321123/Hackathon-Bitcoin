@@ -173,7 +173,8 @@
 }
 
 /* Popup del mapa: resaltar "Acepta Bitcoin" */
-.bitcoin-map .leaflet-popup-content .popup-accepts {
+.bitcoin-map .leaflet-popup-content .popup-accepts,
+.leaflet-popup-content .popup-accepts {
   display: inline-block;
   margin-top: 0.25rem;
   padding: 0.2rem 0.5rem;
@@ -182,4 +183,29 @@
   font-weight: 600;
   font-size: 0.875rem;
   border-radius: var(--radius);
+}
+
+/* Popup ecosistema: nombre, descripción, enlace */
+.leaflet-popup-content .popup-ecosystem {
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.leaflet-popup-content .popup-desc {
+  margin: 0.5rem 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--text-body);
+}
+
+.leaflet-popup-content .popup-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.leaflet-popup-content .popup-link:hover {
+  text-decoration: underline;
 }

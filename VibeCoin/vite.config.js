@@ -1,10 +1,30 @@
+/**
+ * vite.config.js — Configuración de Vite para VibeCoin.
+ *
+ * - plugins: React (JSX, HMR).
+ * - base: en local es '/'; en GitHub Actions se usa '/VibeCoin/' (o el nombre del repo).
+ *   Puedes sobrescribir con VITE_BASE_URL. El base afecta a las rutas estáticas y al Router en producción.
+ * - server.proxy: en desarrollo, /api-coingecko y /api-mempool se reescriben y redirigen a
+ *   CoinGecko y mempool.space para evitar CORS desde el navegador.
+ */
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
-// Para GitHub Pages: usa base con el nombre de tu repo. Ej: '/Hackathon-Bitcoin/'
 export default defineConfig({
   plugins: [react()],
-  // En GitHub Pages usa el nombre del repo. Ej: repo "VibeCoin" → base: '/VibeCoin/'
   base: process.env.VITE_BASE_URL || (process.env.GITHUB_ACTIONS ? '/VibeCoin/' : '/'),
+  server: {
+    proxy: {
+      '/api-coingecko': {
+        target: 'https://api.coingecko.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-coingecko/, ''),
+      },
+      '/api-mempool': {
+        target: 'https://mempool.space',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-mempool/, ''),
+      },
+    },
+  },
 })

@@ -1,6 +1,8 @@
 /**
- * Contenido educativo: qué es Bitcoin y cómo funciona
- * Textos precisos y aptos para principiantes
+ * learnCards.js — Contenido de la lección "Aprende lo básico" (página Learn).
+ *
+ * Cada tarjeta tiene id, title, icon y content. Se renderiza en Learn.jsx con BitcoinCard.
+ * Temas: qué es Bitcoin, por qué existe, blockchain, billeteras, seguridad.
  */
 
 export const learnCards = [
@@ -14,7 +16,7 @@ export const learnCards = [
     id: 'why-exists',
     title: '¿Por qué existe Bitcoin?',
     icon: '💡',
-    content: 'Nace como respuesta a la crisis financiera de 2008. Su creador (o grupo), bajo el seudónimo Satoshi Nakamoto, quería un dinero que no dependiera de bancos ni Estados: escaso, predecible y que cualquiera pudiera verificar.',
+    content: 'Nace como respuesta a la crisis financiera de 2008. Su creador (o grupo), bajo el seudónimo Satoshi Nakamoto, quería un dinero que no dependiera de bancos ni Estados: escaso, predecible y que cualquiera pudiera verificar. El protocolo limita el total a 21 millones de BTC y reduce la emisión a la mitad aproximadamente cada 4 años (halving), lo que hace el suministro predecible y escaso.',
   },
   {
     id: 'blockchain',

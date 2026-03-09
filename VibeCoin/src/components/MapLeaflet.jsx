@@ -1,3 +1,13 @@
+/**
+ * MapLeaflet.jsx — Mapa interactivo con Leaflet y OpenStreetMap.
+ *
+ * Recibe: locations (array de { lat, lon, name } desde API BTC Map o fallback),
+ * famousPlaces (empresas globales con lat, lon, name, category), ecosystemMarkers (p. ej. MEXICO_ECOSYSTEM
+ * con name, description, link, lat, lon). Para cada tipo se crean marcadores con popup:
+ * - famousPlaces y locations: "Acepta Bitcoin".
+ * - ecosystemMarkers: nombre, descripción y enlace "Visitar sitio".
+ * Los iconos por defecto de Leaflet se configuran con URLs CDN para que se vean correctamente.
+ */
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -11,11 +21,7 @@ if (typeof L !== 'undefined' && L.Icon?.Default?.prototype?._getIconUrl) {
   });
 }
 
-/**
- * Mapa Leaflet: muestra ubicaciones normales + marcas famosas (Tesla, Microsoft, etc.).
- * Al hacer clic en cualquier marcador se muestra "Acepta Bitcoin".
- */
-export function MapLeaflet({ locations = [], famousPlaces = [], defaultCenter = [19.4326, -99.1332], defaultZoom = 5 }) {
+export function MapLeaflet({ locations = [], famousPlaces = [], ecosystemMarkers = [], defaultCenter = [19.4326, -99.1332], defaultZoom = 5 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
 
@@ -46,6 +52,18 @@ export function MapLeaflet({ locations = [], famousPlaces = [], defaultCenter = 
       markers.push(marker);
     });
 
+    // Ecosistema (Aureo Bitcoin, La Casa de Satoshi): popup con nombre, descripción, enlace
+    const ecosystem = Array.isArray(ecosystemMarkers) ? ecosystemMarkers.filter((p) => p.lat != null && p.lon != null) : [];
+    ecosystem.forEach((place) => {
+      const marker = L.marker([place.lat, place.lon]).addTo(map);
+      const desc = place.description ? `<p class="popup-desc">${escapeHtml(place.description)}</p>` : '';
+      const link = place.link ? `<a href="${escapeHtml(place.link)}" target="_blank" rel="noopener noreferrer" class="popup-link">Visitar sitio</a>` : '';
+      marker.bindPopup(
+        `<div class="popup-ecosystem"><strong>${escapeHtml(place.name || '')}</strong>${desc}${link}</div>`
+      );
+      markers.push(marker);
+    });
+
     // Ubicaciones de la API / fallback
     const list = Array.isArray(locations) ? locations : [];
     list.forEach((loc) => {
@@ -56,7 +74,7 @@ export function MapLeaflet({ locations = [], famousPlaces = [], defaultCenter = 
       markers.push(marker);
     });
 
-    const total = famous.length + list.length;
+    const total = famous.length + ecosystem.length + list.length;
     if (total > 0) {
       map.setView(defaultCenter, defaultZoom);
     }
@@ -68,7 +86,7 @@ export function MapLeaflet({ locations = [], famousPlaces = [], defaultCenter = 
       map.remove();
       mapRef.current = null;
     };
-  }, [locations?.length, famousPlaces?.length, defaultCenter, defaultZoom]);
+  }, [locations?.length, famousPlaces?.length, ecosystemMarkers?.length, defaultCenter, defaultZoom]);
 
   return (
     <div className="bitcoin-map__container">

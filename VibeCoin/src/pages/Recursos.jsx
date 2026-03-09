@@ -1,96 +1,207 @@
+/**
+ * Recursos.jsx — Página de recursos y documentación (ruta /recursos).
+ *
+ * Contenido por pestañas: Conceptos básicos (texto + BlockchainDiagram), Comprar y guardar
+ * (exchanges y billeteras de ejemplo), Seguridad (checklist), Métricas avanzadas (explicación),
+ * Ecosistema Bitcoin en México (tarjetas de MEXICO_ECOSYSTEM: Aureo Bitcoin, La Casa de Satoshi).
+ * Debajo de las pestañas hay una sección fija de videos embebidos (YouTube).
+ */
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BlockchainDiagram } from '../components/BlockchainDiagram';
+import { MEXICO_ECOSYSTEM } from '../data/mexicoEcosystem';
 import './Recursos.css';
 
-const docTopics = [
-  { id: 'basicos', title: 'Conceptos básicos', desc: 'Qué es Bitcoin, blockchain, billeteras y direcciones.' },
-  { id: 'comprar', title: 'Comprar y guardar', desc: 'Exchanges, KYC, frase semilla y buenas prácticas.' },
-  { id: 'seguridad', title: 'Seguridad y estafas', desc: 'Cómo evitar phishing, fraudes y proteger tus fondos.' },
-  { id: 'avanzado', title: 'Temas avanzados', desc: 'Lightning, Taproot, métricas on-chain y desarrollo.' },
+const TABS = [
+  { id: 'conceptos', label: 'Conceptos básicos' },
+  { id: 'comprar', label: 'Comprar y guardar' },
+  { id: 'seguridad', label: 'Seguridad' },
+  { id: 'metricas', label: 'Métricas avanzadas' },
+  { id: 'ecosistema-mexico', label: 'Ecosistema Bitcoin en México' },
 ];
 
-const usefulLinks = [
-  { href: 'https://bitcoin.org/es/', label: 'Bitcoin.org (oficial)', desc: 'Información y billeteras recomendadas' },
-  { href: 'https://bitso.com', label: 'Bitso', desc: 'Exchange regulado en México' },
-  { href: 'https://mempool.space', label: 'mempool.space', desc: 'Explorador de bloques y comisiones' },
-  { href: 'https://bitcoiner.guide', label: 'Bitcoiner Guide', desc: 'Guías y recursos en varios idiomas' },
+const EXCHANGES = [
+  { name: 'Bitso', region: 'México / Latam', note: 'Regulado, SPEI, tarjeta', url: 'https://bitso.com' },
+  { name: 'Binance', region: 'Global', note: 'P2P, tarjeta, muchos pares', url: 'https://binance.com' },
+  { name: 'Kraken', region: 'Global', note: 'Regulado, buena seguridad', url: 'https://kraken.com' },
 ];
 
-const videos = [
-  {
-    id: 'intro',
-    title: '¿Qué es Bitcoin? (explicación sencilla)',
-    embedId: 'Gc2en3nHxA4',
-    channel: 'En pocas palabras – Kurzgesagt',
-  },
-  {
-    id: 'how-it-works',
-    title: 'Cómo funciona Bitcoin',
-    embedId: 'SSo_EIwHSd4',
-    channel: 'Andreas Antonopoulos',
-  },
+const WALLETS = [
+  { name: 'Bitcoin Core', type: 'Nodo completo', note: 'Máxima soberanía, requiere espacio' },
+  { name: 'Electrum', type: 'Escritorio', note: 'Ligero, bueno para cold' },
+  { name: 'Sparrow', type: 'Escritorio', note: 'Privacidad, multisig' },
+  { name: 'Ledger / Trezor', type: 'Hardware', note: 'Custodia en dispositivo' },
 ];
 
-/**
- * Sección de recursos: documentación, enlaces y videos embebidos.
- */
+const SECURITY_CHECKLIST = [
+  { id: 'seed', label: 'Respaldar frase semilla (12/24 palabras)', detail: 'Guárdala en papel o metal, nunca en digital ni en la nube.' },
+  { id: 'hardware', label: 'Considerar billetera de hardware', detail: 'Para cantidades importantes, un Ledger o Trezor reduce riesgo.' },
+  { id: 'phishing', label: 'Cuidado con phishing y enlaces falsos', detail: 'Siempre verifica la URL y no hagas clic en correos sospechosos.' },
+  { id: 'verify', label: 'Verificar direcciones antes de enviar', detail: 'Compara los primeros y últimos caracteres de la dirección.' },
+];
+
 export function Recursos() {
+  const [activeTab, setActiveTab] = useState('conceptos');
+
   return (
-    <div className="recursos section-page">
+    <div className="recursos recursos--tabs section-page">
       <header className="recursos__header">
         <h1 className="recursos__title">Recursos y documentación</h1>
         <p className="recursos__tagline">
-          Documentación por temas, enlaces útiles y videos para seguir aprendiendo. Todo en un solo lugar.
+          Documentación por temas, comparativas y checklist de seguridad. Todo en un solo lugar.
         </p>
       </header>
 
-      <section className="recursos__section" aria-labelledby="recursos-docs">
-        <h2 id="recursos-docs" className="recursos__section-title">Documentación por temas</h2>
-        <ul className="recursos__topic-list">
-          {docTopics.map(({ id, title, desc }) => (
-            <li key={id} className="recursos__topic">
-              <h3 className="recursos__topic-title">{title}</h3>
-              <p className="recursos__topic-desc">{desc}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="recursos__hint">
-          El contenido detallado de cada tema está en la sección <Link to="/principiantes" className="recursos__link">Principiantes</Link> (guías paso a paso y simuladores).
-        </p>
-      </section>
+      <div className="recursos__tabs" role="tablist" aria-label="Temas de documentación">
+        {TABS.map(({ id, label }) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            aria-selected={activeTab === id}
+            className={`recursos__tab ${activeTab === id ? 'recursos__tab--active' : ''}`}
+            onClick={() => setActiveTab(id)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
 
-      <section className="recursos__section" aria-labelledby="recursos-enlaces">
-        <h2 id="recursos-enlaces" className="recursos__section-title">Enlaces útiles</h2>
-        <ul className="recursos__links">
-          {usefulLinks.map(({ href, label, desc }) => (
-            <li key={href} className="recursos__link-item">
-              <a href={href} target="_blank" rel="noopener noreferrer" className="recursos__link-external">
-                {label}
-              </a>
-              <span className="recursos__link-desc"> — {desc}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <div className="recursos__panel" role="tabpanel">
+        {activeTab === 'conceptos' && (
+          <section className="recursos__content">
+            <h2 className="recursos__content-title">Conceptos básicos</h2>
+            <p className="recursos__content-intro">
+              Bitcoin es una red descentralizada de dinero digital. Las transacciones se agrupan en <strong>bloques</strong> y se encadenan formando la <strong>blockchain</strong>. Así se garantiza que nadie pueda gastar dos veces lo mismo ni alterar el historial sin que la red lo detecte. El suministro está limitado a <strong>21 millones de BTC</strong> y la emisión nueva se reduce a la mitad cada ~4 años (<strong>halving</strong>), por lo que el modelo monetario es predecible y escaso.
+            </p>
+            <BlockchainDiagram />
+            <p className="recursos__hint">
+              Más contenido paso a paso en <Link to="/principiante" className="recursos__link">Principiante</Link> → Aprende lo básico.
+            </p>
+          </section>
+        )}
+
+        {activeTab === 'comprar' && (
+          <section className="recursos__content">
+            <h2 className="recursos__content-title">Comprar y guardar</h2>
+            <p className="recursos__content-intro">
+              Para comprar Bitcoin sueles usar un <strong>exchange</strong> (KYC, SPEI o tarjeta). Luego puedes dejarlo ahí o pasarlo a una <strong>billetera</strong> que tú controlas (custodio propio).
+            </p>
+            <h3 className="recursos__subtitle">Exchanges (ejemplos)</h3>
+            <div className="recursos__cards">
+              {EXCHANGES.map((e) => (
+                <article key={e.name} className="recursos__card">
+                  <h4 className="recursos__card-title">{e.name}</h4>
+                  <p className="recursos__card-meta">{e.region}</p>
+                  <p className="recursos__card-desc">{e.note}</p>
+                  <a href={e.url} target="_blank" rel="noopener noreferrer" className="recursos__card-link">Ir al sitio →</a>
+                </article>
+              ))}
+            </div>
+            <h3 className="recursos__subtitle">Billeteras (ejemplos)</h3>
+            <div className="recursos__cards">
+              {WALLETS.map((w) => (
+                <article key={w.name} className="recursos__card">
+                  <h4 className="recursos__card-title">{w.name}</h4>
+                  <p className="recursos__card-meta">{w.type}</p>
+                  <p className="recursos__card-desc">{w.note}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {activeTab === 'seguridad' && (
+          <section className="recursos__content">
+            <h2 className="recursos__content-title">Seguridad</h2>
+            <p className="recursos__content-intro">
+              Checklist interactivo: marca mentalmente cada punto para reforzar buenas prácticas.
+            </p>
+            <ul className="recursos__checklist">
+              {SECURITY_CHECKLIST.map((item) => (
+                <li key={item.id} className="recursos__checklist-item">
+                  <span className="recursos__checklist-icon" aria-hidden>✓</span>
+                  <div>
+                    <strong className="recursos__checklist-label">{item.label}</strong>
+                    <p className="recursos__checklist-detail">{item.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="recursos__hint">
+              Practica con el juego de frase semilla y el detector de estafas en <Link to="/principiante" className="recursos__link">Principiante</Link>.
+            </p>
+          </section>
+        )}
+
+        {activeTab === 'metricas' && (
+          <section className="recursos__content">
+            <h2 className="recursos__content-title">Métricas avanzadas</h2>
+            <p className="recursos__content-intro">
+              Direcciones activas, hashrate, supply en exchanges, long-term holders: son métricas on-chain que ayudan a entender la salud de la red y el comportamiento de los inversores.
+            </p>
+            <ul className="recursos__list">
+              <li><strong>Direcciones activas</strong> — Cuántas direcciones envían/reciben en un día.</li>
+              <li><strong>Hashrate</strong> — Poder de minado de la red (seguridad).</li>
+              <li><strong>Supply en exchanges</strong> — Menos BTC en exchanges puede indicar acumulación.</li>
+              <li><strong>LTH (Long-term holders)</strong> — Direcciones que no mueven BTC desde hace meses.</li>
+            </ul>
+            <p>
+              <Link to="/noticias" className="recursos__link">En Noticias</Link> puedes ver hashrate, dificultad, mempool y más métricas en vivo.
+            </p>
+          </section>
+        )}
+
+        {activeTab === 'ecosistema-mexico' && (
+          <section className="recursos__content">
+            <h2 className="recursos__content-title">Ecosistema Bitcoin en México</h2>
+            <p className="recursos__content-intro">
+              Proyectos y espacios en México enfocados en Bitcoin: compra, educación y comunidad.
+            </p>
+            <div className="recursos__cards">
+              {MEXICO_ECOSYSTEM.map((item) => (
+                <article key={item.id} className="recursos__card">
+                  <h4 className="recursos__card-title">{item.name}</h4>
+                  <p className="recursos__card-desc">{item.description}</p>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="recursos__card-link recursos__card-link--btn">
+                    Visitar sitio
+                  </a>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
 
       <section className="recursos__section recursos__videos" aria-labelledby="recursos-videos">
         <h2 id="recursos-videos" className="recursos__section-title">Videos (YouTube)</h2>
-        <p className="recursos__intro">Puedes ver los videos directamente aquí sin salir de la página.</p>
         <div className="recursos__video-grid">
-          {videos.map(({ id, title, embedId, channel }) => (
-            <article key={id} className="recursos__video-card">
-              <h3 className="recursos__video-title">{title}</h3>
-              <p className="recursos__video-channel">{channel}</p>
-              <div className="recursos__video-wrapper">
-                <iframe
-                  src={`https://www.youtube.com/embed/${embedId}`}
-                  title={title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="recursos__iframe"
-                />
-              </div>
-            </article>
-          ))}
+          <article className="recursos__video-card">
+            <h3 className="recursos__video-title">¿Qué es Bitcoin?</h3>
+            <p className="recursos__video-channel">Kurzgesagt</p>
+            <div className="recursos__video-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/Gc2en3nHxA4"
+                title="Qué es Bitcoin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="recursos__iframe"
+              />
+            </div>
+          </article>
+          <article className="recursos__video-card">
+            <h3 className="recursos__video-title">Cómo funciona Bitcoin</h3>
+            <p className="recursos__video-channel">Andreas Antonopoulos</p>
+            <div className="recursos__video-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/SSo_EIwHSd4"
+                title="Cómo funciona Bitcoin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="recursos__iframe"
+              />
+            </div>
+          </article>
         </div>
       </section>
     </div>

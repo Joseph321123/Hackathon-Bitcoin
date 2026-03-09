@@ -1,3 +1,11 @@
+/**
+ * Principiantes.jsx — Hub de la ruta principiante (ruta /principiante).
+ *
+ * Lista los 6 módulos de aprendizaje (Aprende, Comprar, Wallet, Estafas, Enviar, Quiz) como
+ * tarjetas enlazadas. Incluye una guía corta (Aprender → Seguridad → Practicar). No incluye
+ * el mapa; la barra de progreso de 6 pasos se muestra en Layout cuando la ruta está en
+ * PRINCIPIANTE_PATHS (incluye /principiante, /learn, /comprar, etc.).
+ */
 import { Link } from 'react-router-dom';
 import './Principiantes.css';
 
@@ -32,11 +40,6 @@ const modules = [
     label: 'Quiz Bitcoin',
     desc: 'Preguntas con tiempo para reforzar lo aprendido.',
   },
-  {
-    to: '/mapa',
-    label: 'Dónde aceptan Bitcoin',
-    desc: 'Tesla, Microsoft, Starbucks y más + mapa interactivo.',
-  },
 ];
 
 /**
@@ -46,9 +49,9 @@ export function Principiantes() {
   return (
     <div className="principiantes section-page">
       <header className="principiantes__header">
-        <h1 className="principiantes__title">Principiantes</h1>
+        <h1 className="principiantes__title">Principiante</h1>
         <p className="principiantes__tagline">
-          Todo lo que necesitas para empezar: conceptos básicos, guías paso a paso y simuladores para practicar sin riesgo.
+          Todo lo que necesitas para empezar: conceptos básicos, guías paso a paso y simuladores para practicar sin riesgo. Pensado para aprender y usar Bitcoin en México.
         </p>
       </header>
 
@@ -58,7 +61,7 @@ export function Principiantes() {
           <li><strong>Conceptos</strong> — Lee qué es Bitcoin y cómo funciona (Aprende lo básico).</li>
           <li><strong>Comprar y guardar</strong> — Practica con el simulador de compra y el juego de la frase semilla.</li>
           <li><strong>Seguridad</strong> — Revisa estafas comunes y el simulador de envío.</li>
-          <li><strong>Practicar</strong> — Haz el quiz y explora el mapa de negocios.</li>
+          <li><strong>Practicar</strong> — Haz el quiz para reforzar lo aprendido.</li>
         </ol>
       </section>
 

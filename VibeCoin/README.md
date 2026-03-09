@@ -1,73 +1,105 @@
-# VibeCoin
+# ₿ VibeCoin
 
-Plataforma educativa e interactiva para aprender, practicar y descubrir dónde usar **Bitcoin**, con foco en México y principiantes.
-
-Construida con **React + Vite** para el hackathon de educación Bitcoin.
+**Plataforma educativa e interactiva** para aprender, practicar y explorar el ecosistema de **Bitcoin**, con enfoque en usuarios en **México** y principiantes. Desarrollada con React + Vite para el hackathon de educación Bitcoin.
 
 ---
 
-## Características
+## Índice
 
-- **Aprende lo básico**: qué es Bitcoin, por qué existe, blockchain, billeteras y seguridad.
-- **Simulador de compra**: convierte MXN → BTC con precio en tiempo real (CoinGecko).
-- **Juego de frase semilla**: ordena palabras desordenadas para entender el respaldo de la wallet.
-- **¿Estafa o seguro?**: juego de tarjetas para reconocer estafas y prácticas seguras.
-- **Simulador de envío**: pasos de una transacción (dirección, monto, comisión).
-- **Quiz tipo Kahoot**: preguntas de opción múltiple con temporizador y puntuación.
-- **Mapa global**: negocios que aceptan Bitcoin (OpenStreetMap + BTC Map / datos de ejemplo).
-- **Progreso y modo oscuro**: seguimiento de pasos completados y tema claro/oscuro.
-
----
-
-## Requisitos
-
-- Node.js 18+
-- npm o yarn
+1. [Descripción general](#descripción-general)
+2. [Requisitos e instalación](#requisitos-e-instalación)
+3. [Desarrollo local](#desarrollo-local)
+4. [Build y preview](#build-y-preview)
+5. [Despliegue (GitHub Pages)](#despliegue-github-pages)
+6. [Cómo funciona la página](#cómo-funciona-la-página)
+7. [Estructura del proyecto](#estructura-del-proyecto)
+8. [APIs y datos externos](#apis-y-datos-externos)
+9. [Tecnologías](#tecnologías)
+10. [Licencia](#licencia)
 
 ---
 
-## Instalación y desarrollo
+## Descripción general
+
+VibeCoin ofrece:
+
+- **Aprender** — Conceptos básicos (blockchain, billeteras, seguridad) en lenguaje sencillo.
+- **Practicar** — Simuladores de compra y envío, juego de frase semilla, detector de estafas y quiz.
+- **Explorar** — Mapa de empresas que aceptan Bitcoin, métricas en vivo y recursos (incluido ecosistema en México).
+
+La interfaz es **responsive**, con **tema claro/oscuro** y **seguimiento de progreso** en la ruta de principiantes (6 pasos hasta “VibeCoin Master”).
+
+---
+
+## Requisitos e instalación
+
+### Requisitos
+
+- **Node.js** 18 o superior  
+- **npm** (o yarn)
+
+### Instalación
 
 ```bash
-# Clonar (o abrir el proyecto)
+# Entrar a la carpeta del proyecto
 cd VibeCoin
 
 # Instalar dependencias
 npm install
-
-# Modo desarrollo
-npm run dev
 ```
-
-Abre [http://localhost:5173](http://localhost:5173). En local la app usa **HashRouter** (URLs con `#/`, p. ej. `#/learn`, `#/mapa`) para que la navegación funcione sin configuración extra.
 
 ---
 
-## Build para producción
+## Desarrollo local
+
+```bash
+npm run dev
+```
+
+- La app se abre en **http://localhost:5173**.
+- En local se usa **HashRouter**: las URLs llevan `#` (por ejemplo `http://localhost:5173/#/`, `http://localhost:5173/#/principiante`, `http://localhost:5173/#/mapa`). Así la navegación funciona sin servidor adicional.
+- El **proxy de Vite** redirige `/api-coingecko` y `/api-mempool` a las APIs externas para evitar CORS en desarrollo.
+
+---
+
+## Build y preview
+
+### Build para producción
 
 ```bash
 npm run build
 ```
 
-La salida queda en la carpeta `dist/`.
+- La salida se genera en la carpeta **`dist/`**.
+- Para GitHub Pages es necesario que el **`base`** en `vite.config.js` coincida con el nombre del repositorio (ver sección de despliegue).
+
+### Probar el build en local
+
+```bash
+npm run preview
+```
+
+- Sirve el contenido de `dist/` para comprobar que todo funciona antes de desplegar.
 
 ---
 
-## Despliegue en GitHub Pages
+## Despliegue (GitHub Pages)
 
-### 1. Configurar `base` en Vite
+### 1. Configurar la base en Vite
 
-En `vite.config.js` el `base` debe coincidir con el nombre de tu repositorio en GitHub. Por defecto está `'/VibeCoin/'` cuando se despliega con GitHub Actions. Si tu repo tiene otro nombre (p. ej. `Hackathon-Bitcoin`), cambia en `vite.config.js`:
+En **`vite.config.js`** el `base` debe ser la ruta del repo en GitHub Pages:
 
-```js
-base: process.env.VITE_BASE_URL || (process.env.GITHUB_ACTIONS ? '/Hackathon-Bitcoin/' : '/'),
-```
+- Si el repo se llama **VibeCoin**, la URL será `https://<usuario>.github.io/VibeCoin/` y en config suele usarse `base: '/VibeCoin/'`.
+- El proyecto ya está preparado para usar `process.env.VITE_BASE_URL` o, en GitHub Actions, `process.env.GITHUB_ACTIONS` para elegir el base correcto.
 
-En local (`npm run dev`) se usa siempre `base: '/'` y **HashRouter**, así que no necesitas tocar nada para desarrollar.
+Si tu repositorio tiene **otro nombre** (por ejemplo `Hackathon-Bitcoin`):
 
-### 2. Opción A: GitHub Actions (recomendado)
+1. En `vite.config.js` cambia la línea del `base` para que en producción use `'/Hackathon-Bitcoin/'` (o el nombre que corresponda).
+2. Ajusta en el workflow de GitHub Actions las rutas `VibeCoin/` si el código no está en una subcarpeta `VibeCoin`.
 
-Crea en la raíz del repo el archivo `.github/workflows/deploy.yml`:
+### 2. Despliegue con GitHub Actions (recomendado)
+
+1. Crea en la **raíz del repositorio** (no dentro de `VibeCoin`) la carpeta `.github/workflows/` y el archivo `deploy.yml` con contenido similar a:
 
 ```yaml
 name: Deploy to GitHub Pages
@@ -119,25 +151,58 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-Ajusta `cache-dependency-path` y `path` si tu proyecto **no** está en la subcarpeta `VibeCoin` (por ejemplo si está en la raíz, usa `./package-lock.json` y `./dist`).
+2. Si el proyecto **no** está en la subcarpeta `VibeCoin` (está en la raíz del repo), cambia:
+   - `cache-dependency-path` a `./package-lock.json`
+   - `path` a `./dist`
+   - y los `cd VibeCoin` según corresponda.
 
-Luego en GitHub:
+3. En GitHub: **Settings → Pages → Source** → selecciona **GitHub Actions**.
 
-1. Repositorio → **Settings** → **Pages**
-2. En **Source** elige **GitHub Actions**
-3. Haz push a `main`; el workflow construirá y desplegará la app.
+4. Tras un push a `main`, el workflow construye y despliega. La URL será:  
+   `https://<tu-usuario>.github.io/<nombre-repo>/`
 
-La URL quedará: `https://<tu-usuario>.github.io/<nombre-repo>/`.
+### 3. Despliegue manual (build local + subir `dist`)
 
-### 3. Opción B: Build local y subir `dist`
-
-Si prefieres no usar Actions:
-
-1. En `vite.config.js` pon `base: '/<nombre-repo>/'` (mismo nombre que el repo).
+1. En `vite.config.js` define `base: '/<nombre-repo>/'`.
 2. Ejecuta `npm run build` dentro de `VibeCoin`.
-3. En **Settings → Pages**, en **Source** elige la rama `gh-pages` y la carpeta `/ (root)` o crea una rama `gh-pages`, copia el contenido de `dist` a la raíz de esa rama y sube.
+3. En **Settings → Pages** elige la rama (por ejemplo `gh-pages`) y la carpeta donde esté el contenido de `dist` (por ejemplo raíz de `gh-pages`).
 
-Recomendación: usar la **Opción A** para que cada push a `main` actualice la página automáticamente.
+Recomendación: usar **GitHub Actions** para que cada push a `main` actualice la página automáticamente.
+
+---
+
+## Cómo funciona la página
+
+### Navegación principal
+
+- **Inicio** — Landing con intro, propiedades de Bitcoin, métricas, gráfico de precio 30 días, casos de uso, dato curioso, por qué aprender Bitcoin y calculadora MXN/BTC.
+- **Principiante** — Hub con 6 módulos: Aprende lo básico, Simulador de compra, Juego frase semilla, Estafas, Simulador de envío, Quiz. La barra de progreso solo se muestra en rutas de principiante y en “Felicitaciones”.
+- **Avanzado** — Dashboard y juegos (adivinar precio, viaje en el tiempo, etc.).
+- **Mapa** — Empresas globales que aceptan Bitcoin y mapa interactivo (OpenStreetMap) con marcadores; incluye puntos del ecosistema en México (Aureo Bitcoin, La Casa de Satoshi).
+- **Noticias** — Métricas en vivo (hashrate, dificultad, mempool) y feed de noticias.
+- **Recursos** — Pestañas: Conceptos básicos, Comprar y guardar, Seguridad, Métricas avanzadas, Ecosistema Bitcoin en México (Aureo Bitcoin, La Casa de Satoshi). Incluye diagrama de blockchain y videos.
+
+### Flujo de principiante (6 pasos)
+
+1. **Aprende** — Lección básica; al terminar se marca “learnedBasics”.
+2. **Comprar** — Simulador MXN → BTC con precio en vivo.
+3. **Wallet** — Juego de ordenar la frase semilla.
+4. **Estafas** — Juego de clasificar estafa vs seguro.
+5. **Enviar** — Simulador de envío de Bitcoin.
+6. **Quiz** — Preguntas con temporizador; se guarda puntuación y “quizCompleted”.
+
+Al completar los 6 pasos se muestra el enlace a **Felicitaciones** (VibeCoin Master). El progreso se persiste en **localStorage** (`vibecoin-progress`).
+
+### Tema y persistencia
+
+- **Modo oscuro/claro**: se guarda en `localStorage` bajo la clave `vibecoin-dark` y se aplica con `data-theme` en la raíz del documento.
+- **Progreso**: se guarda en `vibecoin-progress` (pasos completados, puntuación del quiz, badges).
+
+### Datos en tiempo real
+
+- **Precio BTC**: CoinGecko (MXN, USD, cambio 24h); en dev vía proxy para evitar CORS.
+- **Gráfico 30 días**: CoinGecko `market_chart`; línea verde/roja según tendencia.
+- **Mapa**: ubicaciones desde API BTC Map (o fallback estático); marcadores de empresas famosas y ecosistema México desde datos locales.
 
 ---
 
@@ -145,29 +210,98 @@ Recomendación: usar la **Opción A** para que cada push a `main` actualice la p
 
 ```
 VibeCoin/
+├── public/                 # Assets estáticos (si existen)
 ├── src/
-│   ├── components/    # BitcoinCard, BuySimulator, SeedPhraseGame, ScamGame, QuizGame, BitcoinMap, ProgressTracker, Layout, Nav
-│   ├── pages/         # Home, Learn, Buy, WalletGame, ScamDetector, Send, Quiz, Map
-│   ├── hooks/         # useBitcoinPrice, useLocalStorage, useProgress
-│   ├── services/      # api.js (CoinGecko, BTC Map)
-│   ├── data/          # learnCards, scamData, quizData, mapLocations
-│   ├── utils/         # formatters
-│   ├── App.jsx
-│   └── main.jsx
+│   ├── components/         # Componentes reutilizables
+│   │   ├── Layout.jsx      # Envoltorio: Nav, barra de progreso (en principiante), footer
+│   │   ├── Nav.jsx         # Navegación principal y botón tema
+│   │   ├── ProgressTracker.jsx  # Barra de 6 pasos + enlace Master
+│   │   ├── ErrorBoundary.jsx    # Captura errores de React
+│   │   ├── BitcoinCard.jsx     # Tarjeta con título e icono
+│   │   ├── BuySimulator.jsx    # Simulador MXN → BTC
+│   │   ├── MxnBtcCalculator.jsx # Calculadora en Home
+│   │   ├── SeedPhraseGame.jsx   # Juego frase semilla
+│   │   ├── ScamGame.jsx         # Estafa o seguro
+│   │   ├── SendSimulator.jsx    # Simulador de envío
+│   │   ├── QuizGame.jsx         # Quiz tipo Kahoot
+│   │   ├── MiniBtcChart.jsx     # Gráfico 30 días (Recharts)
+│   │   ├── MapLeaflet.jsx       # Mapa OpenStreetMap (Leaflet)
+│   │   ├── BitcoinMap.jsx       # Contenedor mapa (usa MapLeaflet)
+│   │   ├── BlockchainDiagram.jsx
+│   │   ├── AdvancedDashboard.jsx
+│   │   ├── Achievements.jsx
+│   │   └── games/              # Juegos avanzados (GuessPrice, TimeTraveler)
+│   ├── pages/              # Una página por ruta
+│   │   ├── Home.jsx
+│   │   ├── Principiantes.jsx    # Hub principiante + lista de módulos
+│   │   ├── Learn.jsx
+│   │   ├── Buy.jsx
+│   │   ├── WalletGame.jsx
+│   │   ├── ScamDetector.jsx
+│   │   ├── Send.jsx
+│   │   ├── Quiz.jsx
+│   │   ├── EcosistemaMapa.jsx   # Página "Mapa" (empresas + mapa)
+│   │   ├── Avanzado.jsx
+│   │   ├── BitcoinGames.jsx
+│   │   ├── Noticias.jsx
+│   │   ├── Recursos.jsx
+│   │   ├── Congratulations.jsx
+│   │   └── NotFound.jsx
+│   ├── hooks/
+│   │   ├── useLocalStorage.js   # Persistencia en localStorage
+│   │   ├── useProgress.js       # Estado y marcado de pasos principiante
+│   │   ├── useBitcoinPrice.js   # Precio BTC (MXN/USD)
+│   │   └── useBtcMarketOverview.js  # Precio, cambio 24h, market cap
+│   ├── services/
+│   │   ├── api.js               # CoinGecko, BTC Map, helpers
+│   │   ├── dashboardApi.js     # Métricas avanzadas
+│   │   └── historyApi.js       # Histórico precio (gráficos)
+│   ├── data/                # Datos estáticos
+│   │   ├── learnCards.js
+│   │   ├── scamData.js
+│   │   ├── quizData.js
+│   │   ├── famousPlaces.js      # Empresas globales (Tesla, Microsoft, etc.)
+│   │   ├── mexicoEcosystem.js   # Aureo Bitcoin, La Casa de Satoshi
+│   │   ├── mapLocations.js      # Fallback ubicaciones mapa
+│   │   ├── newsFeed.js
+│   │   ├── badges.js
+│   │   └── ...
+│   ├── utils/
+│   │   └── formatters.js
+│   ├── App.jsx              # Rutas, tema, Router (Hash/Browser)
+│   ├── main.jsx             # Punto de entrada React
+│   ├── index.css            # Variables CSS y estilos globales
+│   └── App.css
 ├── index.html
-├── vite.config.js
-└── package.json
+├── vite.config.js           # Vite + proxy API
+├── package.json
+└── README.md
 ```
 
 ---
 
-## APIs utilizadas
+## APIs y datos externos
 
-- **CoinGecko** (gratuito): precio de Bitcoin en MXN y USD.
-- **BTC Map** (opcional): ubicaciones de negocios que aceptan Bitcoin. Si falla, se usan datos de ejemplo.
+| Origen        | Uso                                                                 |
+|---------------|---------------------------------------------------------------------|
+| **CoinGecko** | Precio BTC (MXN, USD), cambio 24h, gráfico 30 días. En dev vía proxy. |
+| **BTC Map**   | Ubicaciones de negocios que aceptan Bitcoin. Si falla, se usan datos en `data/mapLocations.js`. |
+| **mempool.space** | Métricas de red (opcional). En dev vía proxy.                    |
+
+- Se usa caché y respaldo ante rate limit (429) o fallo de red para no romper la experiencia.
+
+---
+
+## Tecnologías
+
+- **React 19** + **Vite 7**
+- **React Router** (HashRouter en local, BrowserRouter en producción con base)
+- **Recharts** — Gráficos (precio 30 días, dashboards)
+- **Leaflet** — Mapa interactivo (OpenStreetMap)
+- **CSS** — Variables para tema claro/oscuro y diseño responsive
 
 ---
 
 ## Licencia
 
-Proyecto educativo, sin fines de lucro. Código abierto para el hackathon.
+Proyecto educativo, sin fines de lucro. Código abierto para el hackathon de educación Bitcoin.

@@ -1,3 +1,12 @@
+/**
+ * ProgressTracker.jsx — Barra de progreso de la ruta principiante.
+ *
+ * Solo se renderiza cuando la ruta actual está en PRINCIPIANTE_PATHS (Layout.jsx).
+ * Recibe progress, completedCount y totalSteps desde useProgress(). Muestra una barra de
+ * progreso visual, el texto "X / 6 pasos", el siguiente paso pendiente y un enlace a
+ * "VibeCoin Master" (Felicitaciones) cuando los 6 están completos. Cada paso es un Link
+ * a su ruta; los completados llevan la clase progress-tracker__step--done.
+ */
 import { Link } from 'react-router-dom';
 import './ProgressTracker.css';
 
@@ -8,13 +17,17 @@ const steps = [
   { path: '/scam', label: 'Estafas', key: 'completedScamGame' },
   { path: '/enviar', label: 'Enviar', key: 'completedSendSim' },
   { path: '/quiz', label: 'Quiz', key: 'quizCompleted' },
-  { path: '/mapa', label: 'Mapa', key: 'visitedMap' },
 ];
 
-/**
- * Barra de progreso del aprendizaje (pasos completados / total)
- */
+function getNextStep(progress, stepsList) {
+  const next = stepsList.find((s) => !progress[s.key]);
+  return next ? next.label : null;
+}
+
 export function ProgressTracker({ progress, completedCount, totalSteps }) {
+  const allDone = completedCount >= totalSteps;
+  const nextLesson = getNextStep(progress, steps);
+
   return (
     <nav className="progress-tracker" aria-label="Progreso de aprendizaje">
       <div className="progress-tracker__bar-wrap">
@@ -30,8 +43,11 @@ export function ProgressTracker({ progress, completedCount, totalSteps }) {
       </div>
       <p className="progress-tracker__label">
         {completedCount} / {totalSteps} pasos
-        {completedCount >= totalSteps && (
-          <span className="progress-tracker__done-hint"> — ¡Completado! Ve al inicio y haz clic en <strong>VibeCoin Master</strong>.</span>
+        {nextLesson && !allDone && (
+          <span className="progress-tracker__current"> · Siguiente: <strong>{nextLesson}</strong></span>
+        )}
+        {allDone && (
+          <span className="progress-tracker__done-hint"> · ¡Completado! <Link to="/felicitaciones" className="progress-tracker__master-link">VibeCoin Master →</Link></span>
         )}
       </p>
       <ul className="progress-tracker__steps">
@@ -47,6 +63,16 @@ export function ProgressTracker({ progress, completedCount, totalSteps }) {
             </Link>
           </li>
         ))}
+        <li>
+          <Link
+            to="/felicitaciones"
+            className={`progress-tracker__step progress-tracker__step--master ${allDone ? 'progress-tracker__step--done' : ''}`}
+            title="VibeCoin Master"
+          >
+            <span className="progress-tracker__step-dot" />
+            <span className="progress-tracker__step-label">Master</span>
+          </Link>
+        </li>
       </ul>
     </nav>
   );

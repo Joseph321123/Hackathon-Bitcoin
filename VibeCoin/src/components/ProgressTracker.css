@@ -23,9 +23,27 @@
   color: var(--text-muted);
 }
 
+.progress-tracker__current {
+  color: var(--text-body);
+}
+
 .progress-tracker__done-hint {
   color: var(--success);
   font-weight: 500;
+}
+
+.progress-tracker__master-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.progress-tracker__master-link:hover {
+  text-decoration: underline;
+}
+
+.progress-tracker__step--master .progress-tracker__step-label {
+  color: var(--primary);
 }
 
 .progress-tracker__steps {

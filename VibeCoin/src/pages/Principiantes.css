@@ -121,3 +121,18 @@
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
+
+@media (max-width: 640px) {
+  .principiantes__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .principiantes__card {
+    padding: var(--space-4);
+    min-height: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

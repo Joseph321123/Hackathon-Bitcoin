@@ -1,3 +1,12 @@
+/**
+ * useProgress.js — Estado de progreso de la ruta principiante (6 pasos).
+ *
+ * Persiste en localStorage (clave PROGRESS_KEY) mediante useLocalStorage.
+ * - learnedBasics, completedBuySim, completedSeedGame, completedScamGame, completedSendSim, quizCompleted
+ *   marcan cada paso; setQuizResult guarda puntuación y si se completó el quiz.
+ * - completedCount y totalSteps (6) alimentan la barra de progreso en Layout/ProgressTracker.
+ * - addBadge permite registrar logros (badges). Todos los setters están envueltos en useCallback.
+ */
 import { useCallback } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 
@@ -11,14 +20,9 @@ const defaultProgress = {
   completedSendSim: false,
   quizScore: 0,
   quizCompleted: false,
-  visitedMap: false,
   badges: [],
 };
 
-/**
- * Hook para el progreso de aprendizaje y logros.
- * Setters envueltos en useCallback para referencia estable y evitar bucles.
- */
 export function useProgress() {
   const [progress, setProgress] = useLocalStorage(PROGRESS_KEY, defaultProgress);
 
@@ -27,7 +31,6 @@ export function useProgress() {
   const markSeedGameDone = useCallback(() => setProgress((p) => ({ ...p, completedSeedGame: true })), [setProgress]);
   const markScamGameDone = useCallback(() => setProgress((p) => ({ ...p, completedScamGame: true })), [setProgress]);
   const markSendSimDone = useCallback(() => setProgress((p) => ({ ...p, completedSendSim: true })), [setProgress]);
-  const markVisitedMap = useCallback(() => setProgress((p) => ({ ...p, visitedMap: true })), [setProgress]);
 
   const setQuizResult = useCallback(
     (score, completed) =>
@@ -55,21 +58,19 @@ export function useProgress() {
     progress.completedScamGame,
     progress.completedSendSim,
     progress.quizCompleted,
-    progress.visitedMap,
   ].filter(Boolean).length;
 
   return {
     progress,
     setProgress,
     completedCount,
-    totalSteps: 7,
+    totalSteps: 6,
     markLearnedBasics,
     markBuySimDone,
     markSeedGameDone,
     markScamGameDone,
     markSendSimDone,
     setQuizResult,
-    markVisitedMap,
     addBadge,
   };
 }

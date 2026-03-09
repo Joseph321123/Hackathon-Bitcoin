@@ -1,4 +1,11 @@
-/* ===== VibeCoin — Design system (senior-level) ===== */
+/**
+ * index.css — Estilos globales y design system de VibeCoin.
+ *
+ * Variables CSS en :root: tipografía (--font-heading, --font-body), colores (--primary, --success,
+ * --error, --bg, --text-*), sombras, radios y espaciado (--space-*). Tema oscuro bajo [data-theme="dark"].
+ * La app aplica data-theme en el elemento raíz según el estado de useLocalStorage('vibecoin-dark').
+ */
+/* ===== VibeCoin — Design system ===== */
 :root {
   /* Tipografía */
   --font-heading: 'Sora', system-ui, sans-serif;

@@ -1,3 +1,10 @@
+/**
+ * Learn.jsx — Página "Aprende lo básico" (ruta /learn).
+ *
+ * Muestra el diagrama de blockchain y una grid de BitcoinCard con el contenido de learnCards
+ * (qué es Bitcoin, por qué existe, blockchain, billeteras, seguridad). Al montar se llama
+ * markLearnedBasics() para marcar el primer paso del progreso de principiante como completado.
+ */
 import { learnCards } from '../data/learnCards';
 import { BitcoinCard } from '../components/BitcoinCard';
 import { BlockchainDiagram } from '../components/BlockchainDiagram';

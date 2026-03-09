@@ -1,10 +1,14 @@
+/**
+ * ErrorBoundary.jsx — Límite de error para la UI (React error boundary).
+ *
+ * Envuelve el contenido de Layout (main). Si algún componente hijo lanza un error durante
+ * el render o en un lifecycle method, getDerivedStateFromError y componentDidCatch lo capturan;
+ * se muestra un mensaje y un enlace a Inicio en lugar del árbol hijo, sin tumbar toda la app.
+ */
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './ErrorBoundary.css';
 
-/**
- * Captura errores en la UI para que una página rota no tumbe toda la app
- */
 export class ErrorBoundary extends Component {
   state = { hasError: false, error: null };
 

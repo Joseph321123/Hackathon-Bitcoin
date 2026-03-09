@@ -1,11 +1,19 @@
+/**
+ * Nav.jsx — Navegación principal del sitio.
+ *
+ * Muestra el logo/enlace a Inicio, enlaces a Principiante, Avanzado, Mapa, Noticias y Recursos,
+ * y un botón para alternar tema claro/oscuro. El enlace de la ruta actual lleva la clase
+ * nav__link--active para resaltado visual.
+ */
 import { Link, useLocation } from 'react-router-dom';
 import './Nav.css';
 
 const links = [
   { to: '/', label: 'Inicio' },
-  { to: '/principiantes', label: 'Principiantes' },
-  { to: '/noticias', label: 'Noticias' },
+  { to: '/principiante', label: 'Principiante' },
   { to: '/avanzado', label: 'Avanzado' },
+  { to: '/mapa', label: 'Mapa' },
+  { to: '/noticias', label: 'Noticias' },
   { to: '/recursos', label: 'Recursos' },
 ];
 

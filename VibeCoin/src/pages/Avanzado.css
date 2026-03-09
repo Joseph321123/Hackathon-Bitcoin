@@ -115,3 +115,41 @@
   color: #fff;
   text-decoration: none;
 }
+
+.avanzado__game-explain {
+  padding: var(--space-4);
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-4);
+}
+
+.avanzado__game-name {
+  margin: 0 0 var(--space-2);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.avanzado__game-desc {
+  margin: 0 0 var(--space-2);
+  font-size: 0.9375rem;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+
+.avanzado__game-steps {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+.avanzado__game-steps li {
+  margin-bottom: var(--space-1);
+}
+
+.avanzado__cta-wrap {
+  margin: var(--space-4) 0 0;
+}

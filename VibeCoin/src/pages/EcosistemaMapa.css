@@ -1,0 +1,142 @@
+.ecosistema-mapa {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.ecosistema-mapa__header {
+  margin-bottom: var(--space-6);
+}
+
+.ecosistema-mapa__title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.ecosistema-mapa__intro {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.ecosistema-mapa__block {
+  margin-bottom: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+}
+
+.ecosistema-mapa__block:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.ecosistema-mapa__block-title {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.ecosistema-mapa__cards {
+  margin-bottom: 0;
+}
+
+.ecosistema-mapa__mexico-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.ecosistema-mapa__mexico-card {
+  padding: var(--space-5);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ecosistema-mapa__mexico-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.ecosistema-mapa__mexico-name {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.ecosistema-mapa__mexico-desc {
+  margin: 0 0 var(--space-4);
+  font-size: 0.9375rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.ecosistema-mapa__mexico-link {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  background: var(--primary);
+  color: var(--bg);
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.ecosistema-mapa__mexico-link:hover {
+  background: var(--primary-hover);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.ecosistema-mapa__map-block {
+  padding-bottom: var(--space-4);
+}
+
+.ecosistema-mapa__map-hint {
+  margin: 0 0 var(--space-4);
+  font-size: 0.9375rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.ecosistema-mapa__loading {
+  text-align: center;
+  padding: var(--space-6);
+  color: var(--text-muted);
+}
+
+.ecosistema-mapa__toggle {
+  margin-bottom: var(--space-2);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.ecosistema-mapa .bitcoin-map__container {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .ecosistema-mapa {
+    padding: 0 var(--space-3);
+  }
+
+  .ecosistema-mapa__block-title {
+    font-size: 1.125rem;
+  }
+
+  .ecosistema-mapa__mexico-grid {
+    grid-template-columns: 1fr;
+  }
+}
